@@ -1,0 +1,15 @@
+# ignore everpything
+*
+
+# except:
+# -------
+
+# this gitignore
+!.gitignore
+
+# the readme
+!README.md
+
+# c++ source and header files
+!*.cpp
+!*.h
