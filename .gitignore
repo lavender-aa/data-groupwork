@@ -7,9 +7,12 @@
 # this gitignore
 !.gitignore
 
-# the readme
-!README.md
+# markdown files
+!*.md
 
 # c++ source and header files
 !*.cpp
 !*.h
+
+# search one directory deep
+!*/
