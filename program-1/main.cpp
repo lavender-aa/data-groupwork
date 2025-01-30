@@ -3,6 +3,7 @@
 #include "set.h"
 using std::cout, std::cin, std::endl, std::string;
 
+// prototypes
 void print_menu();
 int get_menu_choice();
 bool valid_choice(char);
@@ -14,14 +15,16 @@ void display(Set);
 int main()
 {
     bool quit = false;
-
     Set set = Set();
 
+    // keep performing operations until the user quits (enters 'q')
     while(!quit) 
     {
+        // print, prompt until valid choice entered
         print_menu();
         char choice = get_menu_choice();
 
+        // perform selected choice
         switch(choice) 
         {
             case 'i': 
@@ -62,9 +65,10 @@ void print_menu()
 int get_menu_choice() 
 {
     string input = "";
-
     cout << "Choose an option: ";
 
+    // if the read fails or bad input is entered, make the user try again until 
+    // a good input is received
     while(!(cin >> input) || cin.peek() != '\n' || !valid_choice(input.at(0)) || input.length() > 1) {
         if(!valid_choice(input.at(0)) || input.length() > 0) {
             cout << "Option " << input << " is not a valid choice.\n\nChoose an option: ";
@@ -74,7 +78,6 @@ int get_menu_choice()
         }
 
         cin.clear();
-
         cin.ignore(3000, '\n');
     }
 
