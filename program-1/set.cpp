@@ -9,7 +9,12 @@ Set::Set()
 
 Set::~Set()
 {
-
+    while(head != nullptr)
+    {
+        current = head;
+        head = head->next;
+        delete current;
+    }
 }
 
 
