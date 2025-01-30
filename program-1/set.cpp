@@ -3,6 +3,7 @@
 
 Set::Set()
 {
+    // set pointers to null
     head = nullptr;
     current = nullptr;
 }
@@ -84,10 +85,9 @@ bool Set::search(int num)
 {
     // variables
     bool found = false;
-    Node* temp = nullptr;
-    
+
     // start at the beginning
-    temp = head;
+    Node* temp = head;
 
     // loop through the list until we hit the end of the list or find the number
     while(temp->next != nullptr && temp->data != num)
