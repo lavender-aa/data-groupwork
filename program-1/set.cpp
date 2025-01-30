@@ -49,6 +49,9 @@ void Set::insert(int num)
 
         // set current next pointer to new node
         current->next = temp;
+
+        // set current to the new node
+        current = temp;
     }
 }
 
