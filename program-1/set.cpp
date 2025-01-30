@@ -54,11 +54,8 @@ void Set::insert(int num)
         // create new node if num is not already in the list
         if(current->data != num)
         {
-            // create a new node
-            Node* temp = new Node;
-
-            // set new node data
-            temp->data = num;
+            // create a new node and set new node's data
+            Node* temp = new Node(num);
 
             // set new node next pointer
             temp->next = current->next;
