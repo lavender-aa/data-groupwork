@@ -23,37 +23,55 @@ Set::~Set()
         // delete current node
         delete current;
     }
+
+    // set current to null
+    current = nullptr;
 }
 
 
 void Set::insert(int num)
 {
-    // start at the beginning
-    current = head;
-
-    // loop through the list until the next node data is greater than num and the next node is not null
-    while(current->data < num && current->next != nullptr)
+    // if head is null, create a new node
+    if(head == nullptr)
     {
-        current = current->next;
+        head = new Node;
+        head->data = num;
+        head->next = nullptr;
+        current = head;
     }
-
-    // create new node if num is not already in the list
-    if(current->data != num)
+    else
     {
-        // create a new node
-        Node* temp = new Node;
+        // start at the beginning
+        current = head;
 
-        // set new node data
-        temp->data = num;
+        // loop through the list to find the correct position for the node
+        // continue looping if current node data is less than num and we did not reach the end of the list
+        while(current->data < num && current->next != nullptr)
+        {
+            current = current->next;
+        }
 
-        // set new node next pointer
-        temp->next = current->next;
+        // create new node if num is not already in the list
+        if(current->data != num)
+        {
+            // create a new node
+            Node* temp = new Node;
 
-        // set current next pointer to new node
-        current->next = temp;
+            // set new node data
+            temp->data = num;
 
-        // set current to the new node
-        current = temp;
+            // set new node next pointer
+            temp->next = current->next;
+
+            // set current next pointer to new node
+            current->next = temp;
+
+            // set current to the new node
+            current = temp;
+
+            // set temp to null so it is not a dangling pointer
+            temp = nullptr;
+        }
     }
 }
 
@@ -61,20 +79,53 @@ void Set::insert(int num)
 int Set::remove_current()
 {
     // variables
-    Node* temp = current->next;
-    int val = current->data;
+    int val = -1;
 
-    // get data from next node
-    current->data = current->next->data;
-    
-    // set pointer
-    current->next = temp->next;
+    // check if head is not null
+    if(head != nullptr)
+    {
+        // set val to keep current data to return
+        val = current->data;
 
-    // delete the node
-    delete temp;
+        // check if next node is not null
+        if(current->next != nullptr)
+        {
+            // create a temp node pointed to the next node
+            Node* temp = current->next;
 
-    // set current back to head
-    current = head;
+            // set current data to temp data
+            current->data = temp->data;
+
+            // set current next to temp next
+            current->next = temp->next;
+
+            // we can now delete temp
+            delete temp;
+
+            // set temp to null so it is not a dangling pointer
+            temp = nullptr;
+        }
+        else // next node is null
+        {
+            // start at the beginning
+            Node* prev = head;
+
+            // loop through to get the node before current
+            while(prev->next != current)
+            {
+                prev = prev->next;
+            }
+
+            // set previous node's next pointer to null
+            prev->next = nullptr;
+
+            // now we can delete the current node
+            delete current;
+        }
+
+        // set current to head;
+        current = head;
+    }
 
     // return value removed
     return val;
@@ -89,7 +140,7 @@ bool Set::search(int num)
     // start at the beginning
     Node* temp = head;
 
-    // loop through the list until we hit the end of the list or find the number
+    // loop through the list if we did not reach the end of the list and temp data is not equal to num
     while(temp->next != nullptr && temp->data != num)
     {
         temp = temp->next;
