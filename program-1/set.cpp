@@ -80,25 +80,22 @@ bool Set::search(int num)
 {
     // variables
     bool found = false;
+    Node* temp = nullptr;
     
     // start at the beginning
-    current = head;
+    temp = head;
 
     // loop through the list until we hit the end of the list or find the number
-    while(current->next != nullptr && current->data != num)
+    while(temp->next != nullptr && temp->data != num)
     {
-        current = current->next;
+        temp = temp->next;
     }
 
-    if(current->data == num)
+    if(temp->data == num)
     {
         // set found to true if we found the number
+        current = temp;
         found = true;
-    }
-    else
-    {
-        // set current back to head
-        current = head;
     }
 
     return found;
