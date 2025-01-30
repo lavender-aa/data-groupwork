@@ -24,9 +24,28 @@ Set::~Set()
 }
 
 
-void Set::insert(int)
+void Set::insert(int num)
 {
+    // start at the beginning
+    current = head;
 
+    // loop through the list until the next node is greater than num and the next node is not null
+    while(current->data < num && current->next != nullptr)
+    {
+        current = current->next;
+    }
+
+    // create a new node
+    Node* temp = new Node;
+
+    // set new node data
+    temp->data = num;
+
+    // set new node next pointer
+    temp->next = current->next;
+
+    // set current next pointer to new node
+    current->next = temp;
 }
 
 
