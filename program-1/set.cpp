@@ -29,7 +29,7 @@ void Set::insert(int num)
     // start at the beginning
     current = head;
 
-    // loop through the list until the next node is greater than num and the next node is not null
+    // loop through the list until the next node data is greater than num and the next node is not null
     while(current->data < num && current->next != nullptr)
     {
         current = current->next;
