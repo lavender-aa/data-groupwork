@@ -3,7 +3,8 @@
 
 Set::Set()
 {
-
+    head = nullptr;
+    current = nullptr;
 }
 
 
