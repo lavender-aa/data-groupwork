@@ -17,14 +17,14 @@ This file is for keeping track of what tasks need done and who has been assigned
 - [x] set up files (header, main) -- lavender
 - [x] set.h: add required Set class methods -- lavender
 - [x] set.cpp: set up class methods -- lavender
-- [ ] set.cpp: implement `Set()` -- 
-- [ ] set.cpp: implement `~Set()` -- 
-- [ ] set.cpp: implement `insert()` -- 
-- [ ] set.cpp: implement `remove_current()` -- 
-- [ ] set.cpp: implement `search()` -- 
-- [ ] set.cpp: implement `operator<<()` -- 
-- [ ] main.cpp: set up loop/choice system -- 
-- [ ] main.cpp: implement insert -- 
-- [ ] main.cpp: implement search -- 
-- [ ] main.cpp: implement remove current -- 
-- [ ] main.cpp: implement display -- 
+- [ ] set.cpp: implement `Set()` -- tanner
+- [ ] set.cpp: implement `~Set()` -- tanner
+- [ ] set.cpp: implement `insert()` -- tanner
+- [ ] set.cpp: implement `remove_current()` -- tanner
+- [ ] set.cpp: implement `search()` -- tanner
+- [ ] set.cpp: implement `operator<<()` -- lavender
+- [ ] main.cpp: set up loop/choice system -- lavender
+- [ ] main.cpp: implement insert -- jon
+- [ ] main.cpp: implement search -- jon
+- [ ] main.cpp: implement remove current -- jon
+- [ ] main.cpp: implement display -- jon
