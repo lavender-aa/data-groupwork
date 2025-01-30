@@ -35,17 +35,21 @@ void Set::insert(int num)
         current = current->next;
     }
 
-    // create a new node
-    Node* temp = new Node;
+    // create new node if num is not already in the list
+    if(current->data != num)
+    {
+        // create a new node
+        Node* temp = new Node;
 
-    // set new node data
-    temp->data = num;
+        // set new node data
+        temp->data = num;
 
-    // set new node next pointer
-    temp->next = current->next;
+        // set new node next pointer
+        temp->next = current->next;
 
-    // set current next pointer to new node
-    current->next = temp;
+        // set current next pointer to new node
+        current->next = temp;
+    }
 }
 
 
