@@ -31,8 +31,13 @@ bool Set::search(int)
 }
 
 
-std::ostream& operator<< (std::ostream&, Set)
+std::ostream& operator<< (std::ostream& stream, Set set)
 {
+    Node* temp = set.head;
+    while(temp != nullptr) {
+        stream << "data: " << temp->data << std::endl;
+    }
     
+    return stream;
 }
 
