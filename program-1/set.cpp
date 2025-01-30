@@ -76,9 +76,32 @@ int Set::remove_current()
 }
 
 
-bool Set::search(int)
+bool Set::search(int num)
 {
+    // variables
+    bool found = false;
+    
+    // start at the beginning
+    current = head;
 
+    // loop through the list until we hit the end of the list or find the number
+    while(current->next != nullptr && current->data != num)
+    {
+        current = current->next;
+    }
+
+    if(current->data == num)
+    {
+        // set found to true if we found the number
+        found = true;
+    }
+    else
+    {
+        // set current back to head
+        current = head;
+    }
+
+    return found;
 }
 
 
