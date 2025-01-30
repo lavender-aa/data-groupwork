@@ -5,7 +5,7 @@ using std::cout, std::cin, std::endl, std::string;
 
 void print_menu();
 int get_menu_choice();
-bool not_in_options(char);
+bool valid_choice(char);
 void insert(Set);
 void search(Set);
 void remove(Set);
@@ -15,12 +15,12 @@ int main()
 {
     bool quit = false;
 
-    Set* set = new Set();
+    Set set = Set();
 
     while(!quit) 
     {
         print_menu();
-        int choice = get_menu_choice();
+        char choice = get_menu_choice();
 
         switch(choice) 
         {
@@ -43,8 +43,7 @@ int main()
         }
     }
 
-    delete set;
-    set = nullptr;
+    // set destructor will be called once variable set goes out of scope
 }
 
 // --------------------------------- print, menu choice ---------------------------------
@@ -62,13 +61,13 @@ void print_menu()
 
 int get_menu_choice() 
 {
-    char choice = -1;
+    string input = "";
 
     cout << "Choose an option: ";
 
-    while(!(cin >> choice) || cin.peek() == '\n' || !valid_choice(choice)) {
-        if(!valid_choice(choice)) {
-            cout << "Option " << choice << " is not a valid choice.\n\nChoose an option: " << endl;
+    while(!(cin >> input) || cin.peek() != '\n' || !valid_choice(input.at(0)) || input.length() > 1) {
+        if(!valid_choice(input.at(0)) || input.length() > 0) {
+            cout << "Option " << input << " is not a valid choice.\n\nChoose an option: ";
         }
         else {
             cout << "Invalid input. Enter a character: ";
@@ -82,7 +81,7 @@ int get_menu_choice()
     // spacing
     cout << endl;
 
-    return choice;
+    return input.at(0);
 }
 
 bool valid_choice(char choice) 
