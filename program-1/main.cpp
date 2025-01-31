@@ -47,7 +47,7 @@ int main()
                 break;
             case 'q': 
                 quit = true;
-                cout << "Exiting.";
+                cout << "Exiting." << "\n";
                 break;
         }
     }
