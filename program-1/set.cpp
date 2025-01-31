@@ -104,24 +104,35 @@ int Set::remove_current()
         }
         else // next node is null
         {
-            // start at the beginning
-            Node* prev = head;
-
-            // loop through to get the node before current
-            while(prev->next != current)
+            // check if current is head
+            if(current == head)
             {
-                prev = prev->next;
+                // delete current and set pointers to null
+                delete current;
+                head = nullptr;
+                current = nullptr;
             }
+            else // current is tail node
+            {
+                // create a temp previous node and start at head
+                Node* prev = head;
 
-            // set previous node's next pointer to null
-            prev->next = nullptr;
+                // loop through list if previous node's next does not equal current
+                while(prev->next != current)
+                {
+                    prev = prev->next;
+                }
 
-            // now we can delete the current node
-            delete current;
+                // set previous node's next pointer to null
+                prev->next = nullptr;
+
+                // delete current
+                delete current;
+
+                // set current back to head
+                current = head;
+            }
         }
-
-        // set current to head;
-        current = head;
     }
 
     // return value removed
