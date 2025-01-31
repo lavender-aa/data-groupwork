@@ -111,5 +111,5 @@ void remove(Set& set)
 
 void display(Set& set)
 {
-    cout << set;
+
 }
