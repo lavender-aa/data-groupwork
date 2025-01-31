@@ -169,7 +169,7 @@ bool Set::search(int num)
 }
 
 
-std::ostream& operator<< (std::ostream& stream, Set set)
+std::ostream& operator<< (std::ostream& stream, Set& set)
 {
     stream << "Set elements:\n";
 
