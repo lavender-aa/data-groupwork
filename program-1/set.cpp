@@ -134,20 +134,24 @@ bool Set::search(int num)
     // variables
     bool found = false;
 
-    // start at the beginning
-    Node* temp = head;
-
-    // loop through the list if we did not reach the end of the list and temp data is not equal to num
-    while(temp->next != nullptr && temp->data != num)
+    // check if head is not null
+    if(head != nullptr)
     {
-        temp = temp->next;
-    }
+        // start at the beginning
+        Node* temp = head;
 
-    if(temp->data == num)
-    {
-        // set found to true if we found the number
-        current = temp;
-        found = true;
+        // loop through the list if we did not reach the end of the list and temp data is not equal to num
+        while(temp->next != nullptr && temp->data != num)
+        {
+            temp = temp->next;
+        }
+
+        if(temp->data == num)
+        {
+            // set found to true if we found the number
+            current = temp;
+            found = true;
+        }
     }
 
     return found;
