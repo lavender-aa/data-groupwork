@@ -175,9 +175,11 @@ std::ostream& operator<< (std::ostream& stream, Set set)
 
     // for each node in the list, print out the number in its own line
     Node* temp = set.head;
+    int i = 0;
     while(temp != nullptr) {
-        stream << "data: " << temp->data << "\n";
+        stream << "Node " << i << " data: " << temp->data << "\n";
         temp = temp->next;
+        i++;
     }
 
     // spacing

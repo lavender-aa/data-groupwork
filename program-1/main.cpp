@@ -7,15 +7,21 @@ using std::cout, std::cin, std::endl, std::string;
 void print_menu();
 int get_menu_choice();
 bool valid_choice(char);
-void insert(Set);
-void search(Set);
-void remove(Set);
-void display(Set);
+void insert(Set&);
+void search(Set&);
+void remove(Set&);
+void display(Set&);
 
 int main()
 {
     bool quit = false;
     Set set = Set();
+
+    // debug
+    set.insert(1);
+    set.insert(-1);
+    set.insert(-100);
+    set.insert(0);
 
     // keep performing operations until the user quits (enters 'q')
     while(!quit) 
@@ -94,22 +100,22 @@ bool valid_choice(char choice)
 
 // --------------------------------- menu functions ---------------------------------
 
-void insert(Set set) 
+void insert(Set& set) 
 {
 
 }
 
-void search(Set set)
+void search(Set& set)
 {
 
 }
 
-void remove(Set set)
+void remove(Set& set)
 {
 
 }
 
-void display(Set set)
+void display(Set& set)
 {
-
+    cout << set;
 }
