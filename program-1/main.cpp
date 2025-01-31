@@ -17,12 +17,6 @@ int main()
     bool quit = false;
     Set set = Set();
 
-    // debug
-    set.insert(1);
-    set.insert(-1);
-    set.insert(-100);
-    set.insert(0);
-
     // keep performing operations until the user quits (enters 'q')
     while(!quit) 
     {
