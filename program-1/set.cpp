@@ -186,8 +186,22 @@ bool Set::search(int num)
 }
 
 
-std::ostream& operator<< (std::ostream&, Set)
+std::ostream& operator<< (std::ostream& stream, Set& set)
 {
+    stream << "Set elements:\n";
+
+    // for each node in the list, print out the number in its own line
+    Node* temp = set.head;
+    int i = 0;
+    while(temp != nullptr) {
+        stream << "Node " << i << " data: " << temp->data << "\n";
+        temp = temp->next;
+        i++;
+    }
+
+    // spacing
+    stream << "\n";
     
+    return stream;
 }
 

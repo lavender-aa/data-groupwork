@@ -32,6 +32,8 @@
 
 */
 
+#include <iostream>
+
 struct Node
 {
     int data;
@@ -52,5 +54,5 @@ class Set
         void insert(int);
         int remove_current();
         bool search(int);
-        friend std::ostream& operator<< (std::ostream&, Set);
+        friend std::ostream& operator<< (std::ostream&, Set&);
 };
