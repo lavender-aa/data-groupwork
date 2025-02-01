@@ -39,6 +39,23 @@ void Set::insert(int num)
         head->next = nullptr;
         current = head;
     }
+    else if(num < head->data)
+    {
+        // create a new node before head
+        Node* temp = new Node(num);
+        
+        // set new node next pointer
+        temp->next = head;
+
+        // set head to new node
+        head = temp;
+
+        // set current to head
+        current = head;
+
+        // set temp to null so it is not a dangling pointer
+        temp = nullptr;
+    }
     else
     {
         // start at the beginning
