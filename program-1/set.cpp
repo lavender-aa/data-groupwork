@@ -1,5 +1,6 @@
 #include "set.h"
 #include <iostream>
+#include <iomanip>
 
 Set::Set()
 {
@@ -63,7 +64,7 @@ void Set::insert(int num)
 
         // loop through the list to find the correct position for the node
         // continue looping if current node data is less than num and we did not reach the end of the list
-        while(current->data < num && current->next != nullptr)
+        while(current->data > num && current->next != nullptr)
         {
             current = current->next;
         }
@@ -188,19 +189,22 @@ bool Set::search(int num)
 
 std::ostream& operator<< (std::ostream& stream, Set& set)
 {
-    stream << "Set elements:\n";
+    // print label, set width alignment
+    stream << "Set elements:\n" << std::left;
 
-    // for each node in the list, print out the number in its own line
+    // for each node in the list, print out the number
+    // (up to 4 in a line)
     Node* temp = set.head;
-    int i = 0;
+    int i = 1;
     while(temp != nullptr) {
-        stream << "Node " << i << " data: " << temp->data << "\n";
+        if(i % 4 == 1 && i > 1) stream << "\n";
+        stream << std::setw(3) << temp->data << " ";
         temp = temp->next;
         i++;
     }
 
     // spacing
-    stream << "\n";
+    stream << "\n\n";
     
     return stream;
 }
