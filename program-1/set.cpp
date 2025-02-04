@@ -39,48 +39,39 @@ void Set::insert(int num)
         head->next = nullptr;
         current = head;
     }
-    else if(num < head->data)
-    {
-        // create a new node before head
-        Node* temp = new Node(num);
-        
-        // set new node next pointer
-        temp->next = head;
-
-        // set head to new node
-        head = temp;
-
-        // set current to head
-        current = head;
-
-        // set temp to null so it is not a dangling pointer
-        temp = nullptr;
-    }
     else
     {
-        // start at the beginning
-        current = head;
-
-        // loop through the list to find the correct position for the node
-        // continue looping if current node data is less than num and we did not reach the end of the list
-        while(current->data < num && current->next != nullptr)
+        Node* search = head;
+        bool exist = false;
+        while(search != nullptr)
         {
-            current = current->next;
+            if(search->data == num)
+            {
+                exist = true;
+                break;
+            }
+            search = search->next;
         }
 
-        // create new node if num is not already in the list
-        if(current->data != num)
+        if(!exist)
         {
-            // create a new node and set new node's data
+            // create a new node
             Node* temp = new Node(num);
-
+            
             // set new node next pointer
-            temp->next = current->next;
+            if(current->next == nullptr)
+            {
+                temp->next = nullptr;
+            }
+            else
+            {
+                temp->next = current->next;
+            }
 
-            // set current next pointer to new node
+            // set current next to new node
             current->next = temp;
 
-            // set current to the new node
+            // set current to head
             current = temp;
 
             // set temp to null so it is not a dangling pointer
