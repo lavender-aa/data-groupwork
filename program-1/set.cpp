@@ -190,6 +190,9 @@ bool Set::search(int num)
 
 std::ostream& operator<< (std::ostream& stream, Set& set)
 {
+    // don't do anything if there is no list
+    if(set.head == nullptr) return stream;
+
     // print label, set width alignment
     stream << "Set elements:" << std::left;
 
