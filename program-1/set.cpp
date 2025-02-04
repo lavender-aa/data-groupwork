@@ -56,6 +56,9 @@ void Set::insert(int num)
             search = search->next;
         }
 
+        // set search to null so it is not a dangling pointer
+        search = nullptr;
+
         // only create a new node if num does not exist
         if(!exist)
         {
