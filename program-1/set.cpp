@@ -42,18 +42,21 @@ void Set::insert(int num)
     }
     else
     {
+        // loop through the list and check if num already exists
         Node* search = head;
         bool exist = false;
         while(search != nullptr)
         {
             if(search->data == num)
             {
+                // num does exist, exit loop
                 exist = true;
                 break;
             }
             search = search->next;
         }
 
+        // only create a new node if num does not exist
         if(!exist)
         {
             // create a new node
