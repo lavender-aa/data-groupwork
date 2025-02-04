@@ -1,5 +1,6 @@
 #include "set.h"
 #include <iostream>
+#include <iomanip>
 
 Set::Set()
 {
@@ -62,9 +63,10 @@ void Set::insert(int num)
         current = head;
 
         // loop through the list to find the correct position for the node
-        // continue looping if current node data is less than num and we did not reach the end of the list
-        while(current->data < num && current->next != nullptr)
+        while(current->next != nullptr)
         {
+            // must check separately from condition to avoid nullptr dereference
+            if(current->next->data > num) break;
             current = current->next;
         }
 
@@ -188,19 +190,40 @@ bool Set::search(int num)
 
 std::ostream& operator<< (std::ostream& stream, Set& set)
 {
-    stream << "Set elements:\n";
+    // don't do anything if there is no list
+    if(set.head == nullptr) return stream;
 
-    // for each node in the list, print out the number in its own line
+    // print label, set width alignment
+    stream << "Set elements:" << std::left;
+
+    // get width of longest number (num digits of last number in list)
     Node* temp = set.head;
+    while(temp->next != nullptr)
+    {
+        temp = temp->next;
+    }
+    int width = 1;
+    int num = temp->data;
+    while(num >= 10) 
+    {
+        num /= 10;
+        width++;
+    }
+
+    // for each node in the list, print out the number
+    // (up to 4 in a line)
+    temp = set.head;
     int i = 0;
-    while(temp != nullptr) {
-        stream << "Node " << i << " data: " << temp->data << "\n";
+    while(temp != nullptr)
+    {
+        if(i % 4 == 0) stream << "\n";
+        stream << std::setw(width) << temp->data << " ";
         temp = temp->next;
         i++;
     }
 
     // spacing
-    stream << "\n";
+    stream << "\n\n";
     
     return stream;
 }
