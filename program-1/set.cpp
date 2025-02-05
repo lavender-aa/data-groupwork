@@ -198,11 +198,13 @@ std::ostream& operator<< (std::ostream& stream, Set& set)
     Node* temp = set.head;
     while(temp != nullptr) {
         if(abs(temp->data) > abs(longestNum)) longestNum = temp->data;
+        temp = temp->next;
     }
 
     // compute the width based on the number found
     int width = 1;
     if(longestNum < 0) width++;
+    longestNum = abs(longestNum);
     while(longestNum >= 10) {
         longestNum /= 10;
         width++;
