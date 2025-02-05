@@ -41,49 +41,45 @@ void Set::insert(int num)
         head->next = nullptr;
         current = head;
     }
-    else if(num < head->data)
-    {
-        // create a new node before head
-        Node* temp = new Node(num);
-        
-        // set new node next pointer
-        temp->next = head;
-
-        // set head to new node
-        head = temp;
-
-        // set current to head
-        current = head;
-
-        // set temp to null so it is not a dangling pointer
-        temp = nullptr;
-    }
     else
     {
-        // start at the beginning
-        current = head;
-
-        // loop through the list to find the correct position for the node
-        while(current->next != nullptr)
+        // loop through the list and check if num already exists
+        Node* search = head;
+        bool exist = false;
+        while(search != nullptr)
         {
-            // must check separately from condition to avoid nullptr dereference
-            if(current->next->data > num) break;
-            current = current->next;
+            if(search->data == num)
+            {
+                // num does exist, exit loop
+                exist = true;
+                break;
+            }
+            search = search->next;
         }
 
-        // create new node if num is not already in the list
-        if(current->data != num)
+        // set search to null so it is not a dangling pointer
+        search = nullptr;
+
+        // only create a new node if num does not exist
+        if(!exist)
         {
-            // create a new node and set new node's data
+            // create a new node
             Node* temp = new Node(num);
-
+            
             // set new node next pointer
-            temp->next = current->next;
+            if(current->next == nullptr)
+            {
+                temp->next = nullptr;
+            }
+            else
+            {
+                temp->next = current->next;
+            }
 
-            // set current next pointer to new node
+            // set current next to new node
             current->next = temp;
 
-            // set current to the new node
+            // set current to head
             current = temp;
 
             // set temp to null so it is not a dangling pointer
