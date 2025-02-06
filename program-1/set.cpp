@@ -1,6 +1,7 @@
 #include "set.h"
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 Set::Set()
 {
@@ -192,17 +193,20 @@ std::ostream& operator<< (std::ostream& stream, Set& set)
     // print label, set width alignment
     stream << "Set elements:" << std::left;
 
-    // get width of longest number (num digits of last number in list)
+    // get width of longest number in the set
+    int longestNum = set.head->data;
     Node* temp = set.head;
-    while(temp->next != nullptr)
-    {
+    while(temp != nullptr) {
+        if(abs(temp->data) > abs(longestNum)) longestNum = temp->data;
         temp = temp->next;
     }
+
+    // compute the width based on the number found
     int width = 1;
-    int num = temp->data;
-    while(num >= 10) 
-    {
-        num /= 10;
+    if(longestNum < 0) width++;
+    longestNum = abs(longestNum);
+    while(longestNum >= 10) {
+        longestNum /= 10;
         width++;
     }
 
