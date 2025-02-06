@@ -96,20 +96,30 @@ bool valid_choice(char choice)
 
 void insert(Set& set) 
 {
+    int num;
 
+    cout << "Input integer data for new node: ";
+
+    cin >> num;
+
+    void insert(int num);
 }
 
 void search(Set& set)
 {
+    int num;
 
+    cout << "Input integer data to search for: ";
+
+    void search(int num);
 }
 
 void remove(Set& set)
 {
-
+    void remove_current();
 }
 
 void display(Set& set)
 {
-
+    void display();
 }
