@@ -119,6 +119,7 @@ void evaluatePostfixExpression(Stack& stack, const string& expression)
         else
         {
             cout << "Invalid postfix expression." << endl;
+            break;
         }
 
         // move to the next char
