@@ -1,7 +1,8 @@
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include "stack.h"
-using std::cout, std::endl, std::cin;
+using std::cout, std::endl, std::cin, std::string;
 
 /*
 
@@ -32,97 +33,110 @@ all testing stuff below main() should be removed once the pr is approved (before
 */
 
 // prototypes
-// TODO: remove tests
-void run_tests();
-void test1();
-void test2();
-void test3();
+int performOperation(int operandA, int operandB, char op);
+void evaluatePostfixExpression(Stack& stack, const string expression);
+void clearStack(Stack& stack);
 
 
+
+// main
 int main()
 {
-    run_tests();
+
+
+    return 0;
 }
 
 
 
-// testing methods
-// TODO: remove
-#include <cassert>
-#include <cstring>
-
-void run_tests() {
-    test1();
-    test2();
-    test3();
+// functions
+int performOperation(int operandA, int operandB, char op)
+{
+    switch(op)
+    {
+        case '+':
+            return operandA + operandB;
+        case '-':
+            return operandA - operandB;
+        case '*':
+            return operandA * operandB;
+        case '/':
+            return operandA / operandB;
+        default:
+            return 0;
+    }
 }
 
-// test popping, viewing empty stack
-void test1() {
-    cout << "test 1: pop and view empty stack\n";
+void evaluatePostfixExpression(Stack& stack, const string expression)
+{
+    // variables
+    int charIndex = 0;
+    char currentChar = expression[charIndex];
 
-    Stack stack = Stack();
+    // clear the stack
+    clearStack(stack);
 
-    try {
+    // check if the expression is zero length
+    if(expression.length() == 0)
+    {
+        cout << "Invalid postfix expression." << endl;
+        return;
+    }
+
+    // loop through the expression
+    while(currentChar != '\0')
+    {
+        // check if current char is a digit
+        if(isdigit(currentChar))
+        {
+            // convert and push the digit onto the stack
+            stack.push(currentChar - '0');
+        }
+        // check if the current char is an operator
+        else if(currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '/')
+        {
+            // try to perform the operation
+            try
+            {
+                // pop the top two operands
+                int operandB = stack.pop();
+                int operandA = stack.pop();
+
+                // perform the operation
+                int result = performOperation(operandA, operandB, currentChar);
+
+                // push the result onto the stack
+                stack.push(result);
+            }
+            catch(const std::underflow_error e)
+            {
+                // print error message and break
+                cout << "Invalid expression: " << expression << endl;
+                break;
+            }
+        }
+        // invalid expression
+        else
+        {
+            cout << "Invalid postfix expression." << endl;
+            break;
+        }
+
+        // move to the next char
+        charIndex++;
+        currentChar = expression[charIndex];
+    }
+}
+
+void clearStack(Stack& stack)
+{
+    try
+    {
         stack.pop();
     }
-    catch (std::underflow_error err) {
-        assert((std::string)err.what() == "Attempted to pop empty stack.");
+    catch(const std::underflow_error e)
+    {
+        return;
     }
-
-    try {
-        cout << stack.view_top() << "\n";
-    }
-    catch (std::underflow_error err) {
-        assert((std::string)err.what() == "Attempted to view top of empty stack.");
-    }
-
-    cout << "test 1 passed.\n\n";
-}
-
-// test filing stack, view top, and popping
-void test2() {
-    cout << "test 2: fill and empty stack\n";
-
-    Stack stack = Stack();
-
-    // ensure value returned from stack_top() matches value inserted
-    for(int i = 0; i < 5; i++) {
-        stack.push(i);
-        assert(stack.view_top() == i);
-    }
-
-    // ensure value returned from pop() matches value inserted
-    for(int i = 4; i >= 0; i--) {
-        int num = stack.pop();
-        assert(num == i);
-    }
-
-    cout << "test 2 passed.\n\n";
-}
-
-// test filling then emptying stack too far
-void test3() {
-    cout << "test 3: fill, empty stack too far\n";
-
-    Stack stack = Stack();
-
-    // fill stack with 0-9
-    for(int i = 0; i < 10; i++) {
-        stack.push(i);
-    }
-
-    // pop stack 11 times
-    for(int i = 0; i < 11; i++) {
-        try {
-            stack.pop();
-            assert(i != 10); // 11th pop should fail
-        }
-        catch (std::underflow_error err) {
-            assert((std::string)err.what() == "Attempted to pop empty stack.");
-            assert(i == 10);
-        }
-    }
-
-    cout << "test 3 passed.\n\n";
+    clearStack(stack);
 }
