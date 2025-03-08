@@ -34,6 +34,7 @@ all testing stuff below main() should be removed once the pr is approved (before
 
 // prototypes
 int performOperation(int operandA, int operandB, char op);
+void evaluatePostfixExpression(Stack& stack, const string& expression);
 
 int main()
 {
@@ -59,5 +60,52 @@ int performOperation(int operandA, int operandB, char op)
             return operandA / operandB;
         default:
             return 0;
+    }
+}
+
+void evaluatePostfixExpression(Stack& stack, const string& expression)
+{
+    int charIndex = 0;
+    char currentChar = expression[charIndex];
+    while(currentChar != '\0')
+    {
+        // check if current char is a digit
+        if(isdigit(currentChar))
+        {
+            // convert and push the digit onto the stack
+            stack.push(currentChar - '0');
+        }
+        // check if the current char is an operator
+        else if(currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '/')
+        {
+            // try to perform the operation
+            try
+            {
+                // pop the top two operands
+                int operandB = stack.pop();
+                int operandA = stack.pop();
+
+                // perform the operation
+                int result = performOperation(operandA, operandB, currentChar);
+
+                // push the result onto the stack
+                stack.push(result);
+            }
+            catch(const std::underflow_error e)
+            {
+                // print error message and break
+                cout << "Evaluation error: " << e.what() << endl;
+                break;
+            }
+        }
+        // invalid expression
+        else
+        {
+            cout << "Invalid postfix expression." << endl;
+        }
+
+        // move to the next char
+        charIndex++;
+        currentChar = expression[charIndex];
     }
 }
