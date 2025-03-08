@@ -73,6 +73,9 @@ void evaluatePostfixExpression(Stack& stack, const string& expression)
     int charIndex = 0;
     char currentChar = expression[charIndex];
 
+    // clear the stack
+    clearStack(stack);
+
     // loop through the expression
     while(currentChar != '\0')
     {
