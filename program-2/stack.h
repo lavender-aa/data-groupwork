@@ -1,4 +1,5 @@
-struct Node {
+struct Node
+{
     int data;
     Node* next;
     Node() { next = nullptr; }
@@ -32,7 +33,8 @@ struct Node {
                        if the stack is empty, prints a stack underflow error and exits with code 10
 */
 
-class Stack {
+class Stack
+{
     private:
         Node* head;
         Node* top;
