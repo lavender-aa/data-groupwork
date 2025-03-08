@@ -35,6 +35,7 @@ all testing stuff below main() should be removed once the pr is approved (before
 // prototypes
 int performOperation(int operandA, int operandB, char op);
 void evaluatePostfixExpression(Stack& stack, const string& expression);
+void clearStack(Stack& stack);
 
 int main()
 {
@@ -108,4 +109,17 @@ void evaluatePostfixExpression(Stack& stack, const string& expression)
         charIndex++;
         currentChar = expression[charIndex];
     }
+}
+
+void clearStack(Stack& stack)
+{
+    try
+    {
+        stack.pop();
+    }
+    catch(const std::underflow_error e)
+    {
+        return;
+    }
+    clearStack(stack);
 }
