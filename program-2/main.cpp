@@ -69,8 +69,11 @@ int performOperation(int operandA, int operandB, char op)
 
 void evaluatePostfixExpression(Stack& stack, const string& expression)
 {
+    // variables
     int charIndex = 0;
     char currentChar = expression[charIndex];
+
+    // loop through the expression
     while(currentChar != '\0')
     {
         // check if current char is a digit
