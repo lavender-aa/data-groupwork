@@ -76,6 +76,13 @@ void evaluatePostfixExpression(Stack& stack, const string& expression)
     // clear the stack
     clearStack(stack);
 
+    // check if the expression is zero length
+    if(expression.length() == 0)
+    {
+        cout << "Invalid postfix expression." << endl;
+        return;
+    }
+
     // loop through the expression
     while(currentChar != '\0')
     {
