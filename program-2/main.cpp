@@ -32,7 +32,7 @@ all testing stuff below main() should be removed once the pr is approved (before
 */
 
 // prototypes
-
+int performOperation(int operandA, int operandB, char op);
 
 int main()
 {
@@ -44,3 +44,19 @@ int main()
 
 
 // functions
+int performOperation(int operandA, int operandB, char op)
+{
+    switch(op)
+    {
+        case '+':
+            return operandA + operandB;
+        case '-':
+            return operandA - operandB;
+        case '*':
+            return operandA * operandB;
+        case '/':
+            return operandA / operandB;
+        default:
+            return 0;
+    }
+}
