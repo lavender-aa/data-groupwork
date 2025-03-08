@@ -67,7 +67,7 @@ int performOperation(int operandA, int operandB, char op)
     }
 }
 
-void evaluatePostfixExpression(Stack& stack, const string& expression)
+void evaluatePostfixExpression(Stack& stack, const string expression)
 {
     // variables
     int charIndex = 0;
