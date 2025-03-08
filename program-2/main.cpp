@@ -1,7 +1,8 @@
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include "stack.h"
-using std::cout, std::endl, std::cin;
+using std::cout, std::endl, std::cin, std::string;
 
 /*
 
