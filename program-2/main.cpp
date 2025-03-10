@@ -130,6 +130,12 @@ void evaluatePostfixExpression(Stack& stack, const string expression)
         charIndex++;
         currentChar = expression[charIndex];
     }
+
+    // validate the result
+    if(!validateResult(stack))
+    {
+        cout << "Invalid expression: " << expression << endl;
+    }
 }
 
 void clearStack(Stack& stack)
