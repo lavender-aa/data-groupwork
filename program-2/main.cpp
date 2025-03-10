@@ -36,6 +36,7 @@ all testing stuff below main() should be removed once the pr is approved (before
 int performOperation(int operandA, int operandB, char op);
 void evaluatePostfixExpression(Stack& stack, const string expression);
 void clearStack(Stack& stack);
+bool validateResult(Stack& stack);
 
 
 
@@ -142,4 +143,30 @@ void clearStack(Stack& stack)
         return;
     }
     clearStack(stack);
+}
+
+bool validateResult(Stack& stack)
+{
+    try
+    {
+        int value = stack.pop();
+        try
+        {
+            // stack has more than one element
+            stack.pop();
+            stack.push(value);
+            return false;
+        }
+        catch (const std::underflow_error e)
+        {
+            // stack has only one element
+            stack.push(value);
+            return true;
+        }
+    }
+    catch (const std::underflow_error e)
+    {
+        // stack is empty
+        return false;
+    }
 }
