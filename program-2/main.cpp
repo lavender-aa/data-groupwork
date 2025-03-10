@@ -83,7 +83,7 @@ void evaluatePostfixExpression(Stack& stack, const string expression)
     // check if the expression is zero length
     if(expression.length() == 0)
     {
-        cout << "Invalid postfix expression." << endl;
+        cout << "Invalid expression: No expression" << endl;
         return;
     }
 
