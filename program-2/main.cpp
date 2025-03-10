@@ -114,16 +114,15 @@ void evaluatePostfixExpression(Stack& stack, const string expression)
             }
             catch(const std::underflow_error e)
             {
-                // print error message and break
-                cout << "Invalid expression: " << expression << endl;
+                // expression is invalid, break
                 break;
             }
         }
-        // invalid expression
+        // invalid expression, return
         else
         {
-            cout << "Invalid postfix expression." << endl;
-            break;
+            cout << "Invalid expression: " << expression << endl;
+            return;
         }
 
         // move to the next char
