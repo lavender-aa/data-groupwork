@@ -54,12 +54,16 @@ int performOperation(int operandA, int operandB, char op)
 {
     switch(op)
     {
+        // addition
         case '+':
             return operandA + operandB;
+        // subtraction
         case '-':
             return operandA - operandB;
+        // multiplication
         case '*':
             return operandA * operandB;
+        // division
         case '/':
             return operandA / operandB;
         default:
