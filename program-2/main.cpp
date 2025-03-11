@@ -66,7 +66,15 @@ int performOperation(int operandA, int operandB, char op)
             return operandA * operandB;
         // division
         case '/':
-            return operandA / operandB;
+            // check for division by zero
+            if(operandB == 0)
+            {
+                throw std::invalid_argument("Division by zero");
+            }
+            else
+            {
+                return operandA / operandB;
+            }
         default:
             return 0;
     }
@@ -116,6 +124,11 @@ bool evaluatePostfixExpression(Stack& stack, const string expression)
             catch(const std::underflow_error e)
             {
                 // expression is invalid, break
+                break;
+            }
+            catch(const std::invalid_argument e)
+            {
+                // division by zero, break
                 break;
             }
         }
