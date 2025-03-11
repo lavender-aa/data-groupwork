@@ -34,7 +34,7 @@ all testing stuff below main() should be removed once the pr is approved (before
 
 // prototypes
 int performOperation(int operandA, int operandB, char op);
-void evaluatePostfixExpression(Stack& stack, const string expression);
+bool evaluatePostfixExpression(Stack& stack, const string expression);
 void clearStack(Stack& stack);
 bool validateResult(Stack& stack);
 
@@ -72,7 +72,7 @@ int performOperation(int operandA, int operandB, char op)
     }
 }
 
-void evaluatePostfixExpression(Stack& stack, const string expression)
+bool evaluatePostfixExpression(Stack& stack, const string expression)
 {
     // variables
     int charIndex = 0;
@@ -85,7 +85,7 @@ void evaluatePostfixExpression(Stack& stack, const string expression)
     if(expression.length() == 0)
     {
         cout << "Invalid expression: No expression" << endl;
-        return;
+        return false;
     }
 
     // loop through the expression
@@ -123,7 +123,7 @@ void evaluatePostfixExpression(Stack& stack, const string expression)
         else
         {
             cout << "Invalid expression: " << expression << endl;
-            return;
+            return false;
         }
 
         // move to the next char
@@ -135,7 +135,11 @@ void evaluatePostfixExpression(Stack& stack, const string expression)
     if(!validateResult(stack))
     {
         cout << "Invalid expression: " << expression << endl;
+        return false;
     }
+
+    // expression is valid
+    return true;
 }
 
 void clearStack(Stack& stack)
