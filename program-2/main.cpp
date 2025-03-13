@@ -1,8 +1,12 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <fstream>
 #include "stack.h"
-using std::cout, std::endl, std::cin, std::string;
+using std::cout;
+using std::endl;
+using std::cin;
+using std::string;
 
 /*
 
@@ -34,7 +38,7 @@ all testing stuff below main() should be removed once the pr is approved (before
 
 // prototypes
 int performOperation(int operandA, int operandB, char op);
-bool evaluatePostfixExpression(Stack& stack, const string expression);
+string evaluatePostfixExpression(Stack& stack, const string expression);
 void clearStack(Stack& stack);
 bool validateResult(Stack& stack);
 
@@ -43,7 +47,25 @@ bool validateResult(Stack& stack);
 // main
 int main()
 {
+    //Reading and storing the input file, line-by-line.
+    std::ifstream file("input.txt");
+    string expression;
 
+    if(file.is_open()) 
+    {
+        while(getline(file, expression))
+        { 
+            //Prints what the initial expression is.
+            cout << expression << endl;
+
+            //Evaluates and return the expression
+            evaluatePostfixExpression;
+
+            /*Skip a line for spacing*/
+            cout << "\n";
+        }
+        file.close();
+    }
 
     return 0;
 }
@@ -80,7 +102,7 @@ int performOperation(int operandA, int operandB, char op)
     }
 }
 
-bool evaluatePostfixExpression(Stack& stack, const string expression)
+string evaluatePostfixExpression(Stack& stack, const string expression)
 {
     // variables
     int charIndex = 0;
@@ -93,7 +115,7 @@ bool evaluatePostfixExpression(Stack& stack, const string expression)
     if(expression.length() == 0)
     {
         cout << "Invalid expression: No expression" << endl;
-        return false;
+        return 0;
     }
 
     // loop through the expression
@@ -136,7 +158,7 @@ bool evaluatePostfixExpression(Stack& stack, const string expression)
         else
         {
             cout << "Invalid expression: " << expression << endl;
-            return false;
+            return 0;
         }
 
         // move to the next char
@@ -148,11 +170,11 @@ bool evaluatePostfixExpression(Stack& stack, const string expression)
     if(!validateResult(stack))
     {
         cout << "Invalid expression: " << expression << endl;
-        return false;
+        return 0;
     }
 
     // expression is valid
-    return true;
+    return expression;
 }
 
 void clearStack(Stack& stack)
