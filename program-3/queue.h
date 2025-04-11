@@ -26,7 +26,7 @@ struct Node
         postcondition: adds a new node with data = num to the back of the list
 
     int dequeue()
-        description: delete a node and return its data
+        description: return data from front node, then deletes the node
         precondition: >0 nodes exist
         postcondition: returns the data from the front node, then removes the node
                        throws an underflow error if the queue is empty
