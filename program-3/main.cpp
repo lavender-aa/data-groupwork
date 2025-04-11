@@ -7,8 +7,6 @@
     notes:
     ------
     input: `input.txt`, one number per line
-    
-    put data into array as it is read
 
     nth digit (n=0 for ones): (num / Math.pow(10, n)) % 10
 
@@ -24,5 +22,31 @@
 
 int main()
 {
+    // open file
 
+    // create digit queues (array of queues)
+
+    // put data into data queue (find max)
+
+    // close file
+
+    // call radix_sort on number queue (pass queue and max):
+
+        // calculate max_digits
+
+        // digit_num = 0
+        // while digit_num < max_digits:
+        //      while numq.has_more():
+        //          current = dequeue(numq)
+        //          digit = get_nth_place_digit(current, n)
+        //          queues[digit].enqueue(current)
+        // 
+        //      for i in range(10):
+        //          while queues[i].has_more():
+        //              numq.enqueue(queues[i].dequeue())
+        // 
+        //      digit_num += 1
+        // # sorted elems now in numq
+
+        // print in columns of 5 (each with width of max_digits)
 }
