@@ -77,7 +77,7 @@ int Queue::view_front()
 int Queue::view_back()
 {
     // check if the queue is empty
-    if(front == nullptr)
+    if(back == nullptr)
     {
         throw std::underflow_error("Queue is empty.");
     }
