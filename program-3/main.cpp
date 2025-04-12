@@ -1,5 +1,10 @@
 #include "queue.h"
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <stdexcept>
+#define endl "\n"
+using std::ifstream, std::string, std::stoi;
 
 /*
     implement radix sort
@@ -23,10 +28,27 @@
 int main()
 {
     // open file
+    ifstream input("input.txt");
 
     // create digit queues (array of queues)
+    Queue data;
+    Queue digitQueues[10];
 
     // put data into data queue (find max)
+    int max = 0;
+    string line;
+    while(getline(input, line))
+    {
+        int num = 0;
+        if(num = stoi(line))
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 
     // close file
 
