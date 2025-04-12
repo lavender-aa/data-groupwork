@@ -20,7 +20,7 @@ int main()
     {
         std::cout << endl << "Input file `input.txt` does not exist." << endl;
         std::cout << "Exiting program." << endl;
-        return 0;
+        return 1;
     }
 
     // create queue to hold data
