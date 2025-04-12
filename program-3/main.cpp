@@ -3,72 +3,112 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <cmath>
 #define endl "\n"
-using std::ifstream, std::string, std::stoi;
 
-/*
-    implement radix sort
-
-    notes:
-    ------
-    input: `input.txt`, one number per line
-
-    nth digit (n=0 for ones): (num / Math.pow(10, n)) % 10
-
-    get max num digits (max n) from largest array element
-
-    each pass: (while n < max) ((n starts at 0, so should end at max-1 to get `max` number of iterations))
-        - for each array item, enqueue based on nth digit
-        - dequeue in order back into array
-        - increase n
-
-    output sorted numbers in columns of 5
-*/
+int getNumDigits(int);
+std::string repeatSpace(int);
+void radixSort(Queue&, int);
 
 int main()
 {
     // open file
-    ifstream input("input.txt");
+    std::ifstream input("input.txt");
 
-    // create digit queues (array of queues)
+    // test if file exists
+    if(!input.is_open())
+    {
+        std::cout << endl << "Input file `input.txt` does not exist." << endl;
+        std::cout << "Exiting program." << endl;
+        return 0;
+    }
+
+    // create queue to hold data
     Queue data;
-    Queue digitQueues[10];
 
-    // put data into data queue (find max)
-    int max = 0;
-    string line;
+    // put data into data queue while finding the longest number of digits
+    int maxDigits = 0;
+    std::string line;
     while(getline(input, line))
     {
         int num = 0;
-        if(num = stoi(line))
-        {
+        try { num = stoi(line); } // get line (number) from file
+        catch(std::invalid_argument) { continue; } // skip if invalid
 
-        }
-        else
-        {
-
-        }
+        // adjust max if needed, add to data
+        int numDigits = getNumDigits(num);
+        if(numDigits > maxDigits) maxDigits = numDigits;
+        data.enqueue(num);
     }
 
     // close file
+    input.close();
 
-    // call radix_sort on number queue (pass queue and max):
+    // call radix_sort on number queue (pass queue and max digits):
+    radixSort(data, maxDigits);
+    
+    // print data in neat columns
+    int column = 0;
+    while(true)
+    {
+        try
+        {
+            // get data into string, print with correct spacing
+            int num = data.dequeue();
+            std::string toPrint = std::to_string(num);
+            std::cout << toPrint << repeatSpace(maxDigits - toPrint.length() + 1);
 
-        // calculate max_digits
+            // move to the next row if we just printed the 5th number
+            if(++column % 5 == 0) std::cout << endl;
+        }
+        catch(std::underflow_error) { break; } // stop once we run out of values
+    }
 
+    // make sure the program always ends with a newline
+    if(column != 0) std::cout << endl;
+}
+
+// returns the number of digits in a number (including negative sign)
+int getNumDigits(int num)
+{
+    int numDigits = (num < 0) ? 1 : 0; // number with a negative sign is one longer
+    num = abs(num);
+    while(num > 0)
+    {
+        num /= 10;
+        numDigits++;
+    }
+    return numDigits;
+}
+
+// returns a string of repeated spaces
+// (slightly cleans up printing section above)
+std::string repeatSpace(int numRepeats)
+{
+    std::string result = "";
+    for(int i = 0; i < numRepeats; i++)
+        result += " ";
+    return result;
+}
+
+void radixSort(Queue& data, int maxDigits)
+{
+        // create digit queues
+
+        // # algorithm in python(ish)
         // digit_num = 0
         // while digit_num < max_digits:
-        //      while numq.has_more():
-        //          current = dequeue(numq)
-        //          digit = get_nth_place_digit(current, n)
+        //      while True:
+        //          try: current = data.dequeue(num)
+        //          catch underflow_err: break
+        //          digit = (current / Math.pow(10,digit_num)) % 10
         //          queues[digit].enqueue(current)
         // 
         //      for i in range(10):
-        //          while queues[i].has_more():
-        //              numq.enqueue(queues[i].dequeue())
+        //          while True:
+        //              try: queues[i].view_back()
+        //              catch underflow_err: break
+        //              data.enqueue(queues[i].dequeue())
         // 
         //      digit_num += 1
-        // # sorted elems now in numq
-
-        // print in columns of 5 (each with width of max_digits)
 }
