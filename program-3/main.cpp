@@ -12,7 +12,7 @@ void radixSort(Queue&, int);
 
 int main()
 {
-    // open file
+    // open file (closed when goes out of scope by destructor)
     std::ifstream input("input.txt");
 
     // test if file exists
@@ -40,9 +40,6 @@ int main()
         if(numDigits > maxDigits) maxDigits = numDigits;
         data.enqueue(num);
     }
-
-    // close file
-    input.close();
 
     // call radix_sort on number queue (pass queue and max digits):
     radixSort(data, maxDigits);
