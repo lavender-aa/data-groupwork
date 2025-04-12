@@ -41,7 +41,7 @@ int main()
         data.enqueue(num);
     }
 
-    // call radix_sort on number queue (pass queue and max digits):
+    // sort the data
     radixSort(data, maxDigits);
     
     // print data in neat columns
