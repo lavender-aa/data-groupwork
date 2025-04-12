@@ -51,9 +51,8 @@ int main()
         try
         {
             // get data into string, print with correct spacing
-            int num = data.dequeue();
-            std::string toPrint = std::to_string(num);
-            std::cout << toPrint << repeatSpace(maxDigits - toPrint.length() + 1);
+            std::string num = std::to_string(data.dequeue());
+            std::cout << num << repeatSpace(maxDigits - num.length() + 1);
 
             // move to the next row if we just printed the 5th number
             if(++column % 5 == 0) std::cout << endl;
