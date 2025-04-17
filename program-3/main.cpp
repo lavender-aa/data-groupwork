@@ -6,7 +6,6 @@
 #include <cmath>
 #define endl "\n"
 
-void printColumns(Queue, int);
 int getNumDigits(int);
 std::string repeatSpace(int);
 void radixSort(Queue&, int);
