@@ -41,7 +41,7 @@ int main()
         data.enqueue(num);
     }
 
-    // sort the data
+    // sort and print the data
     radixSort(data, maxDigits);
     
     // print data in neat columns
@@ -90,21 +90,35 @@ std::string repeatSpace(int numRepeats)
 void radixSort(Queue& data, int maxDigits)
 {
         // create digit queues
+        Queue queues[10];
 
-        // # algorithm in python(ish)
-        // digit_num = 0
-        // while digit_num < max_digits:
-        //      while True:
-        //          try: current = data.dequeue(num)
-        //          catch underflow_err: break
-        //          digit = (current / Math.pow(10,digit_num)) % 10
-        //          queues[digit].enqueue(current)
-        // 
-        //      for i in range(10):
-        //          while True:
-        //              try: queues[i].view_back()
-        //              catch underflow_err: break
-        //              data.enqueue(queues[i].dequeue())
-        // 
-        //      digit_num += 1
+        // placeholder for next queue item
+        int num;
+
+        int digitNum = 0;
+        while(digitNum < maxDigits)
+        {
+            // sort data from main queue into digit queues
+            while(true)
+            {
+                try { num = data.dequeue(); }
+                catch(std::underflow_error) { break; }
+                int digit = abs((num / (int)pow(10, digitNum)) % 10);
+                queues[digit].enqueue(num);
+            }
+
+            // add each digit queue back to data queue in order (0-9)
+            for(int i = 0; i < 10; i++)
+            {
+                while(true)
+                {
+                    try { num = queues[i].view_back(); }
+                    catch(std::underflow_error) { break; }
+                    data.enqueue(queues[i].dequeue());
+                }
+            }
+
+            // move to next digit
+            digitNum++;
+        }
 }
