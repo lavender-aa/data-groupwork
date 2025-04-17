@@ -44,11 +44,7 @@ int main()
 
     // sort and print the data
     radixSort(data, maxDigits);
-    printColumns(data, maxDigits);
-}
-
-void printColumns(Queue data, int maxDigits)
-{
+    
     // print data in neat columns
     int column = 0;
     while(true)
