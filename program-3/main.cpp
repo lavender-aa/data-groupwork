@@ -101,7 +101,7 @@ void radixSort(Queue& data, int maxDigits)
                 int current;
                 try { current = data.dequeue(); }
                 catch(std::underflow_error) { break; }
-                int digit = (current = pow(10, digitNum)) % 10;
+                int digit = (current / (int)pow(10, digitNum)) % 10;
                 queues[digit].enqueue(current);
             }
 
