@@ -121,4 +121,38 @@ void radixSort(Queue& data, int maxDigits)
             // move to next digit
             digitNum++;
         }
+
+        // handle negative numbers:
+
+        // separate negatives, get number of negatives
+        int count = 0;
+        while(true)
+        {
+            try { num = data.dequeue(); }
+            catch(std::underflow_error) { break; }
+            if(num < 0)
+            {
+                count++;
+                queues[1].enqueue(num);
+            }
+            else
+                queues[0].enqueue(num);
+        }
+
+        // reverse negative number queue using array
+        int negatives[count];
+        for(int i = count - 1; i >= 0; i--)
+        {
+            try { negatives[i] = queues[1].dequeue(); }
+            catch(std::underflow_error) { break; }
+        }
+
+        // put numbers back into data queue (array, queue)
+        for(int i = 0; i < count; i++)
+            data.enqueue(negatives[i]);
+        while(true)
+        {
+            try { data.enqueue(queues[0].dequeue()); }
+            catch(std::underflow_error) { break; }
+        }
 }
