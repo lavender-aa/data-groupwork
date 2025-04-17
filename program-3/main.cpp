@@ -93,17 +93,19 @@ void radixSort(Queue& data, int maxDigits)
         // create digit queues
         Queue queues[10];
 
+        // placeholder for next queue item
+        int num;
+
         int digitNum = 0;
         while(digitNum < maxDigits)
         {
             // sort data from main queue into digit queues
             while(true)
             {
-                int current;
-                try { current = data.dequeue(); }
+                try { num = data.dequeue(); }
                 catch(std::underflow_error) { break; }
-                int digit = (current / (int)pow(10, digitNum)) % 10;
-                queues[digit].enqueue(current);
+                int digit = abs((num / (int)pow(10, digitNum)) % 10);
+                queues[digit].enqueue(num);
             }
 
             // add each digit queue back to data queue in order (0-9)
@@ -111,7 +113,6 @@ void radixSort(Queue& data, int maxDigits)
             {
                 while(true)
                 {
-                    int num;
                     try { num = queues[i].view_back(); }
                     catch(std::underflow_error) { break; }
                     data.enqueue(queues[i].dequeue());
