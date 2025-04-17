@@ -6,6 +6,7 @@
 #include <cmath>
 #define endl "\n"
 
+void printColumns(Queue, int);
 int getNumDigits(int);
 std::string repeatSpace(int);
 void radixSort(Queue&, int);
@@ -41,9 +42,13 @@ int main()
         data.enqueue(num);
     }
 
-    // sort the data
+    // sort and print the data
     radixSort(data, maxDigits);
-    
+    printColumns(data, maxDigits);
+}
+
+void printColumns(Queue data, int maxDigits)
+{
     // print data in neat columns
     int column = 0;
     while(true)
